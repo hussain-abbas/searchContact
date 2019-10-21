@@ -73,7 +73,7 @@ class VerificationFragment : Fragment() {
             {
                 code = bundle.getString("code")
                 number = bundle.getString("number")
-
+                txtNumber.text = number
             }
         }
 
@@ -337,17 +337,17 @@ class VerificationFragment : Fragment() {
         val mediaType = MediaType.parse("application/json")
         val body = RequestBody.create(mediaType, jsonObject.toString())
 
-        getCode(body )
+        getCode(body , code)
 
 
     }
 
-    private fun getCode(body: RequestBody )
+    private fun getCode(body: RequestBody , code: String)
     {
-        observerGetVerificationCode(viewModel!!.getVerificationCode(body) )
+        observerGetVerificationCode(viewModel!!.getVerificationCode(body)  ,code)
     }
 
-    private fun observerGetVerificationCode(liveData: LiveData<MobileVerificationCodeResponse>  )
+    private fun observerGetVerificationCode(liveData: LiveData<MobileVerificationCodeResponse>  , code: String)
     {
         val pDialog = SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE)
         pDialog.progressHelper.barColor = Color.parseColor("#A5DC86")
@@ -363,8 +363,7 @@ class VerificationFragment : Fragment() {
                     {
                         pDialog.dismissWithAnimation()
                     }
-
-
+                    this.code =  code
                 }
                 0 -> {
                     pDialog.changeAlertType(SweetAlertDialog.ERROR_TYPE)

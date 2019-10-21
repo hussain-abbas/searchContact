@@ -35,6 +35,7 @@
                 android:textStyle="bold"
                 android:text="@string/_923344903285"
                 android:textSize="18sp"
+                android:id="@+id/txtNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
